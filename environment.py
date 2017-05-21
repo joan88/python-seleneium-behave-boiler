@@ -12,15 +12,15 @@ def before_all (context):
 	# define Chrome browser instances
 	context.browser = webdriver.Chrome(path)
 	context.browser.set_window_position(0, 0)
-	context.browser.set_window_size(750, 500)
+	context.browser.set_window_size(650, 750)
 
 	context.second_browser = webdriver.Chrome(path)
-	context.second_browser.set_window_position(750, 0)
-	context.second_browser.set_window_size(750, 500)
+	context.second_browser.set_window_position(450, 0)
+	context.second_browser.set_window_size(650, 750)
 
 	context.third_browser = webdriver.Chrome(path)
-	context.third_browser.set_window_position(0, 500)
-	context.third_browser.set_window_size(750, 500)
+	context.third_browser.set_window_position(900, 0)
+	context.third_browser.set_window_size(650, 750)
 
 def after_all(context):
 	# close browsers after all have been executed

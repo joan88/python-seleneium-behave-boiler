@@ -22,7 +22,6 @@ class Page(unittest.TestCase):
 
     def verify_page(self,page,browser):
         if page == "Login Page":
-            print "Yun oh"
             heading_text = browser.find_element(*CommonLocators.HEADING).text
             self.assertEqual("Sign in to Chat", heading_text) 
         elif page == "Chat Page":
