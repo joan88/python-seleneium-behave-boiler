@@ -1,17 +1,17 @@
+import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from base import Page
 from login_page import LoginPage
 from locators.locators import *
 from config import Url
-import unittest
+
 
 class ChatPage(Page):
 	chatter = []
 	message = []
 	wins_are_open = False
 	_already_logged_in = False
-
 
 	def __init__(self, context):
 		Page.__init__(
@@ -43,8 +43,57 @@ class ChatPage(Page):
 			login.click_btn('Login', self.browser[1])
 			self._already_logged_in = True
 		if len(self.chatter) == 3:
-			login.input_chatter_name(self.chatter[2], self.browser[2])
-			login.input_chattee_name(self.chatter[0], self.browser[2])
+			login.input_chatter_name(self.chatter[0], self.browser[2])
+			login.input_chattee_name(self.chatter[2], self.browser[2])
 			login.click_btn('Login', self.browser[2])
+
+	def send_message(self):
+		#Scenario 1
+		if len(self.message) == 1:
+			text_box = self.find_element(self.browser[0],
+				*ChatPageLocators.SAY_SOMETHING_TXT_BOX)
+			send_btn = self.find_element(self.browser[0],
+				*ChatPageLocators.SEND_BTN)
+			text_box.send_keys(self.message[0])
+			send_btn.click()
+		#Scenario 2
+		elif len(self.message) == 2:
+			text_box = self.find_element(self.browser[1],
+				*ChatPageLocators.SAY_SOMETHING_TXT_BOX)
+			send_btn = self.find_element(self.browser[1],
+				*ChatPageLocators.SEND_BTN)
+			text_box.send_keys(self.message[1])
+			send_btn.click()
+		#Scenario 3
+		elif len(self.message) == 3:
+			text_box = self.find_element(self.browser[2],
+				*ChatPageLocators.SAY_SOMETHING_TXT_BOX)
+			send_btn = self.find_element(self.browser[2],
+				*ChatPageLocators.SEND_BTN)
+			text_box.send_keys(self.message[2])
+			send_btn.click()
+		else:
+			raise Exception("Sorry! you have to extend the code to send more messages")
+	def check_if_message_received(self):
+		try:
+			if len(self.message) == 1:		
+				self.find_element(self.browser[0],
+				*ChatPageLocators.YELLOW_MSG)
+			elif len(self.message) == 2:	
+				self.find_element(self.browser[1],
+				*ChatPageLocators.JELLO_MSG)
+		except Exception as e:
+			print ("Message may not have sent! ERROR: ", e)
+		try:
+			if len(self.message) == 3:	
+				self.find_element(self.browser[1],
+				*ChatPageLocators.SEND_BTN)
+				raise Exception()
+			except:
+				pass
+
+
+
+
 
 
