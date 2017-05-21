@@ -32,7 +32,7 @@ class ChatPage(Page):
 
 	def login_chatter(self, context):
 		login = LoginPage(context)
-		if len(self.chatter) == 2 and self._already_logged_in == False:
+		if len(self.chatter) == 2 and ChatPage._already_logged_in == False:
 			#Login w/ Browser 1 
 			login.input_chatter_name(self.chatter[0], self.browser[0])
 			login.input_chattee_name(self.chatter[1], self.browser[0])
@@ -41,7 +41,7 @@ class ChatPage(Page):
 			login.input_chatter_name(self.chatter[1], self.browser[1])
 			login.input_chattee_name(self.chatter[0], self.browser[1])
 			login.click_btn('Login', self.browser[1])
-			self._already_logged_in = True
+			ChatPage._already_logged_in = True
 		if len(self.chatter) == 3:
 			login.input_chatter_name(self.chatter[0], self.browser[2])
 			login.input_chattee_name(self.chatter[2], self.browser[2])
@@ -75,6 +75,10 @@ class ChatPage(Page):
 		else:
 			raise Exception("Sorry! you have to extend the code to send more messages")
 	def check_if_message_received(self):
+		'''
+		Check if user1 can read user2
+		can read each other's messages
+		'''
 		try:
 			if len(self.message) == 1:		
 				self.find_element(self.browser[0],
@@ -84,13 +88,17 @@ class ChatPage(Page):
 				*ChatPageLocators.JELLO_MSG)
 		except Exception as e:
 			print ("Message may not have sent! ERROR: ", e)
+		'''
+		Check if user2 can read user3's messages from user1,
+		if YES then raise an Error
+		'''
 		try:
 			if len(self.message) == 3:	
-				self.find_element(self.browser[1],
-				*ChatPageLocators.SEND_BTN)
-				raise Exception()
-			except:
-				pass
+				self.find_element(self.browser[2],
+				*ChatPageLocators.YOW_MSG)
+				raise Exception("ALERT! Message was sent to the wrong person!")
+		except:
+			pass
 
 
 

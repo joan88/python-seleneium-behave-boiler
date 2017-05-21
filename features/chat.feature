@@ -17,6 +17,5 @@ Feature: Chat
 	Scenario: Mary cannot see chat between Robert and Patricia
 		Given I am "Robert"
 		When I send the message "Yow" to "Patricia"
-		Then "Patricia" should see the message "Yow"
-		But "Mary" should NOT see the message "Yow"
+		Then "Mary" should NOT see the message "Yow"
 
