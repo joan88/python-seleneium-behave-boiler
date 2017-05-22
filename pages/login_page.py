@@ -28,3 +28,11 @@ class LoginPage(Page):
 		btn = self.find_element(browser,
 			*btn_dict[btn_name])
 		btn.click()
+
+	def verify_not_in_page(self, page):
+		if self.verify_page(page, self.browser[0]) == True:
+			raise Exception("Bug! You should not be able to chat with yourself")
+		else:
+			pass
+
+

@@ -7,7 +7,6 @@ from selenium import webdriver
 def before_all (context):
 	
 	path = './chromedriver'
-	# path = './chromedriver_win'
 
 	# define Chrome browser instances
 	context.browser = webdriver.Chrome(path)

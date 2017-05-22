@@ -10,4 +10,10 @@ Feature: Login
 		And I input chattee's name "Mary"
 		When I click "Login"
 		Then I should see the "Chat Page"
-		
+
+	Scenario: Chatter chats with self
+		Given I enter "Robert" as Chatter and Chattee
+		When I click "Login"
+		Then I should NOT be taken to "Chat Page"
+
+	

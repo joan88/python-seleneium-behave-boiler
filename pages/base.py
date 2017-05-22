@@ -24,9 +24,11 @@ class Page(unittest.TestCase):
         if page == "Login Page":
             heading_text = browser.find_element(*CommonLocators.HEADING).text
             self.assertEqual("Sign in to Chat", heading_text) 
+            return True
         elif page == "Chat Page":
             heading_text = browser.find_element(*CommonLocators.HEADING).text
             self.assertEqual("Chatting", heading_text) 
+            return True
         else:
             raise Exception(page + ' Does Not Exist!')
 

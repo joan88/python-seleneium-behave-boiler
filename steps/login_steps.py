@@ -23,8 +23,25 @@ def step_impl(context, button):
 	page = LoginPage(context)
 	page.click_btn(button, page.browser[0])
 
-@then('I should see the "{chat_page}"')
-def step_impl(context, chat_page):
+@then('I should see the "{_page}"')
+def step_impl(context, _page):
 	page = LoginPage(context)
-	page.verify_page(chat_page, page.browser[0])
+	page.verify_page(_page, page.browser[0])
+
+@given('I enter "{name}" as Chatter and Chattee')
+def step_impl(context, name):
+	page = LoginPage(context)
+	page.open(Url.LOGIN_PAGE, page.browser[0])
+	page.input_chatter_name(name, page.browser[0])
+	page.input_chattee_name(name, page.browser[0])
+
+@then('I should NOT be taken to "{_page}"')
+def step_impl(context, _page):
+	page = LoginPage(context)
+	page.verify_not_in_page(_page)
+	time.sleep(10)
+
+
+
+
 

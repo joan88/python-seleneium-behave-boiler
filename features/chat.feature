@@ -1,4 +1,4 @@
-@wip
+@chat
 Feature: Chat
 
 	As a chatter, 
